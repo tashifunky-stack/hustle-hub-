@@ -44,7 +44,7 @@
     <div class="main-content">
         <h2>Start Your Application</h2>
         
-        <div class="price-badge">Fixed Service Fee: Ksh 200</div>
+        <div class="price-badge">Fixed Service Fee: Ksh 350</div>
 
         <label>Full Name</label>
         <input type="text" id="studentName" placeholder="John Doe">
@@ -62,7 +62,7 @@
         <label>Course Name (e.g., Clinical Medicine)</label>
         <input type="text" id="courseName" placeholder="Enter course name">
 
-        <button class="btn-pay" onclick="sendToWhatsApp()">Pay Ksh 300 & Apply via WhatsApp</button>
+        <button class="btn-pay" onclick="sendToWhatsApp()">Pay Ksh 350 & Apply via WhatsApp</button>
     </div>
 </div>
 
@@ -83,7 +83,7 @@
                       "Index: " + index + "\n" +
                       "Level: " + type + "\n" +
                       "Course: " + course + "\n\n" +
-                      "I am ready to pay the Ksh 200 fixed fee via M-PESA. Please provide the Till/Phone number.";
+                      "I am ready to pay the Ksh 350 fixed fee via M-PESA. Please provide the Till/Phone number.";
 
         // Convert message to a WhatsApp link
         var whatsappURL = "https://wa.me/" + phoneNumber + "?text=" + encodeURIComponent(message);
