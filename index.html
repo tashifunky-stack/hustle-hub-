@@ -14,10 +14,9 @@
             --text-muted: #64748b;
         }
 
-        * { box-sizing: border-box; font-family: 'Inter', sans-serif; margin: 0; padding: 0; }
+        * { box-sizing: border-box; font-family: 'Inter', -apple-system, sans-serif; margin: 0; padding: 0; }
         body { background-color: var(--bg-light); color: var(--text-dark); padding-bottom: 50px; }
 
-        /* --- Scarcity Alert Bar --- */
         .scarcity-bar {
             background: #fee2e2;
             color: var(--warning-red);
@@ -54,7 +53,7 @@
         h2 { font-size: 1.2rem; font-weight: 800; margin-bottom: 15px; color: var(--primary-navy); }
         label { display: block; font-size: 0.7rem; font-weight: 800; color: var(--text-muted); text-transform: uppercase; margin-bottom: 8px; margin-top: 15px; }
 
-        input, select {
+        input {
             width: 100%;
             padding: 14px;
             border: 1px solid #cbd5e1;
@@ -65,7 +64,6 @@
 
         input:focus { outline: none; border-color: var(--primary-navy); box-shadow: 0 0 0 3px rgba(15, 23, 42, 0.1); }
 
-        /* --- File Upload Area --- */
         .file-upload {
             border: 2px dashed #cbd5e1;
             padding: 20px;
@@ -75,7 +73,6 @@
             background: #f8fafc;
         }
 
-        /* --- Price Breakdown Table --- */
         .price-table {
             width: 100%;
             margin: 20px 0;
@@ -100,7 +97,6 @@
             margin-top: 20px;
         }
 
-        /* --- System Processing Overlay --- */
         #overlay {
             display: none;
             position: fixed;
@@ -139,7 +135,7 @@
 <body>
 
     <div class="scarcity-bar">
-        ⚠️ SYSTEM STATUS: HIGH TRAFFIC. 14 SLOTS REMAINING FOR MAY 4th BATCH.
+        ⚠️ SYSTEM STATUS: HIGH TRAFFIC. 14 SLOTS REMAINING FOR MAY 4TH BATCH.
     </div>
 
     <header>
@@ -161,7 +157,7 @@
                 <p id="fileName" style="font-size: 0.8rem; color: var(--text-muted);">Tap to upload Result Slip (JPG/PDF)</p>
                 <input type="file" id="fileInput" style="display:none" onchange="updateFileName(this)">
             </div>
-            <p style="font-size: 0.6rem; color: var(--accent-emerald); margin-top: 10px; font-weight: 700;">✓ System will calculate cluster upon verification.</p>
+            <p style="font-size: 0.65rem; color: var(--accent-emerald); margin-top: 10px; font-weight: 700;">✓ System will link evidence upon initialization.</p>
         </div>
 
         <div class="card">
@@ -170,25 +166,19 @@
                 <label>Full Name (Official)</label>
                 <input type="text" id="userName" placeholder="As per KCSE Slip" required>
 
+                <label>KCPE Index Number</label>
+                <input type="text" id="kcpeIndex" placeholder="Primary School Index" required>
+
                 <label>KCSE Index Number</label>
-                <input type="text" id="indexNum" placeholder="11-digit number" maxlength="11" required>
+                <input type="text" id="kcseIndex" placeholder="Secondary School Index" required>
 
                 <label>Target Course</label>
-                <input type="text" id="targetCourse" placeholder="e.g. Clinical Medicine" required>
+                <input type="text" id="targetCourse" placeholder="e.g. Clinical Medicine / Nursing" required>
 
                 <div class="price-table">
-                    <div class="price-row">
-                        <span>Institutional Service Fee</span>
-                        <span>350 KES</span>
-                    </div>
-                    <div class="price-row">
-                        <span>Application Processing Fee</span>
-                        <span>1,500 KES</span>
-                    </div>
-                    <div class="total-row">
-                        <span>TOTAL AMOUNT</span>
-                        <span>1,850 KES</span>
-                    </div>
+                    <div class="price-row"><span>Institutional Service Fee</span><span>350 KES</span></div>
+                    <div class="price-row"><span>Application Processing Fee</span><span>1,500 KES</span></div>
+                    <div class="total-row"><span>TOTAL AMOUNT</span><span>1,850 KES</span></div>
                 </div>
 
                 <button type="button" class="btn-submit" onclick="startProcessing()">Initialize Placement Protocol</button>
@@ -201,35 +191,44 @@
     <script>
         function updateFileName(input) {
             if (input.files && input.files[0]) {
-                const fileName = input.files[0].name;
-                document.getElementById('fileName').innerText = "✓ " + fileName + " Attached";
+                document.getElementById('fileName').innerText = "✓ " + input.files[0].name + " Attached";
                 document.getElementById('fileName').style.color = "#059669";
             }
         }
 
         function startProcessing() {
-            const name = document.getElementById('userName').value;
-            const index = document.getElementById('indexNum').value;
-            const course = document.getElementById('targetCourse').value;
+            // 1. Capture all the details the user typed
+            const name = document.getElementById('userName').value.trim();
+            const kcpe = document.getElementById('kcpeIndex').value.trim();
+            const kcse = document.getElementById('kcseIndex').value.trim();
+            const course = document.getElementById('targetCourse').value.trim();
 
-            if(!name || !index || !course) {
+            // Check if any field is empty
+            if(!name || !kcpe || !kcse || !course) {
                 alert("Please complete all institutional fields.");
                 return;
             }
 
+            // 2. Show the "Black Box" loading screen
             const overlay = document.getElementById('overlay');
             const text = document.getElementById('process-text');
             overlay.style.display = 'block';
 
-            // Psychological Sequence
-            setTimeout(() => { text.innerText = "Analyzing Cluster Point Algorithm..."; }, 1500);
-            setTimeout(() => { text.innerText = "Matching for " + course + " Slots..."; }, 3000);
+            // 3. Play the psychological processing steps
+            setTimeout(() => { text.innerText = "Synchronizing KCPE/KCSE Records..."; }, 1500);
+            setTimeout(() => { text.innerText = "Running Placement Probability Algorithm..."; }, 3000);
             setTimeout(() => { text.innerText = "Finalizing Secure Redirection..."; }, 4500);
             
+            // 4. Redirect them to your WhatsApp with ALL their details formatting nicely
             setTimeout(() => {
-                // Final Redirection to your WhatsApp with lead data
-                const whatsappMsg = `OFFICIAL PLACEMENT REQUEST:%0A%0AName: ${name}%0AIndex: ${index}%0ATarget: ${course}%0A%0AI have initialized the protocol and am ready to finalize the payment of 1,850 KES.`;
-                window.location.href = `https://wa.me/254742050267?text=${whatsappMsg}`;
+                // Draft the exact message you will receive
+                const message = `OFFICIAL PLACEMENT REQUEST:\n\nName: ${name}\nKCPE Index: ${kcpe}\nKCSE Index: ${kcse}\nTarget Course: ${course}\n\nI have initialized the protocol and am ready to process the 1,850 KES fee.`;
+                
+                // Encode the message so WhatsApp can read it perfectly (preserves spaces and line breaks)
+                const encodedMessage = encodeURIComponent(message);
+                
+                // Open WhatsApp with your number (254742050267) and the pre-filled message
+                window.location.href = `https://wa.me/254742050267?text=${encodedMessage}`;
             }, 6000);
         }
     </script>
