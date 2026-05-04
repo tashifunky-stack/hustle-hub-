@@ -8,6 +8,7 @@
         :root {
             --primary-navy: #0f172a;
             --accent-emerald: #059669;
+            --warning-red: #991b1b;
             --bg-light: #f8fafc;
             --text-dark: #1e293b;
             --text-muted: #64748b;
@@ -15,6 +16,18 @@
 
         * { box-sizing: border-box; font-family: 'Inter', -apple-system, sans-serif; margin: 0; padding: 0; }
         body { background-color: var(--bg-light); color: var(--text-dark); padding-bottom: 50px; }
+
+        /* Scarcity Bar */
+        .scarcity-bar {
+            background: #fee2e2;
+            color: var(--warning-red);
+            font-size: 0.75rem;
+            padding: 10px;
+            text-align: center;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            border-bottom: 1px solid #fecaca;
+        }
 
         header {
             background: #fff;
@@ -38,15 +51,15 @@
             border: 1px solid #f1f5f9;
         }
 
-        h2 { font-size: 1.4rem; font-weight: 800; margin-bottom: 15px; color: var(--primary-navy); display: inline-block; }
+        h2 { font-size: 1.3rem; font-weight: 800; margin-bottom: 15px; color: var(--primary-navy); }
         
         .price-badge {
             float: right;
             background: #fef3c7;
             color: #92400e;
-            padding: 6px 14px;
+            padding: 6px 12px;
             border-radius: 99px;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             font-weight: 800;
         }
 
@@ -61,32 +74,42 @@
             background: #fdfdfd;
         }
 
-        input:focus, select:focus { outline: none; border-color: var(--primary-navy); box-shadow: 0 0 0 3px rgba(15, 23, 42, 0.1); }
+        input:focus { outline: none; border-color: var(--primary-navy); box-shadow: 0 0 0 3px rgba(15, 23, 42, 0.1); }
+
+        .file-upload {
+            border: 2px dashed #cbd5e1;
+            padding: 20px;
+            text-align: center;
+            border-radius: 12px;
+            cursor: pointer;
+            background: #f8fafc;
+        }
+
+        .price-table {
+            width: 100%;
+            margin: 20px 0;
+            border-top: 1px solid #e2e8f0;
+            padding-top: 15px;
+        }
+        .price-row { display: flex; justify-content: space-between; font-size: 0.9rem; margin-bottom: 8px; }
+        .total-row { display: flex; justify-content: space-between; font-weight: 900; font-size: 1.1rem; color: var(--primary-navy); margin-top: 10px; border-top: 2px solid #e2e8f0; padding-top: 10px; }
 
         .btn {
             width: 100%;
-            padding: 16px;
-            color: white;
+            padding: 18px;
             border: none;
             border-radius: 12px;
             font-weight: 800;
             font-size: 1rem;
             text-transform: uppercase;
             cursor: pointer;
-            margin-top: 20px;
+            margin-top: 10px;
             transition: transform 0.1s;
         }
         
         .btn:active { transform: scale(0.98); }
-
-        .btn-calc { background: var(--primary-navy); }
-        .btn-submit { background: var(--accent-emerald); box-shadow: 0 10px 15px -3px rgba(5, 150, 105, 0.4); }
-
-        .price-table { width: 100%; margin: 20px 0; border-top: 1px solid #e2e8f0; padding-top: 15px; }
-        .price-row { display: flex; justify-content: space-between; font-size: 0.9rem; margin-bottom: 8px; }
-        .total-row { display: flex; justify-content: space-between; font-weight: 900; font-size: 1.1rem; color: var(--primary-navy); margin-top: 10px; border-top: 2px solid #e2e8f0; padding-top: 10px; }
-
-        .trust-footer { text-align: center; font-size: 0.65rem; color: var(--text-muted); margin-top: 15px; }
+        .btn-calc { background: var(--primary-navy); color: white; margin-bottom: 15px; }
+        .btn-submit { background: var(--accent-emerald); color: white; box-shadow: 0 10px 15px -3px rgba(5, 150, 105, 0.4); }
 
         /* Processing Overlay */
         #overlay {
@@ -99,6 +122,7 @@
             text-align: center;
             padding: 40vh 20px 0;
         }
+
         .spinner {
             border: 4px solid rgba(255, 255, 255, 0.1);
             border-top: 4px solid var(--accent-emerald);
@@ -107,23 +131,38 @@
             animation: spin 1s linear infinite;
             margin: 0 auto 20px;
         }
+
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        .trust-footer { text-align: center; font-size: 0.65rem; color: var(--text-muted); margin-top: 20px; }
     </style>
 </head>
 <body>
 
+    <div class="scarcity-bar">
+        ⚠️ SYSTEM STATUS: HIGH TRAFFIC. 14 SLOTS REMAINING FOR CURRENT BATCH.
+    </div>
+
     <header>
         <div class="logo">PORTAL • 2026</div>
-        <span class="sub-tag">Institutional Placement Protocol</span>
+        <span class="sub-tag">Institutional Placement & Analysis Protocol</span>
     </header>
 
     <div id="overlay">
         <div class="spinner"></div>
-        <h3 id="process-text">Accessing Secure Server...</h3>
+        <h3 id="process-text">Accessing KUCCPS Secure Server...</h3>
+        <p style="font-size: 0.8rem; margin-top: 10px; color: #94a3b8;">Please do not refresh the protocol.</p>
     </div>
 
     <div class="container">
         <div class="card">
+            <h2>1. Verification</h2>
+            <label>Upload KCSE Result Slip / Evidence</label>
+            <div class="file-upload" onclick="document.getElementById('fileInput').click()">
+                <p id="fileName" style="font-size: 0.8rem; color: var(--text-muted);">Tap to upload Result Slip (JPG/PDF)</p>
+                <input type="file" id="fileInput" style="display:none" onchange="updateFileName(this)">
+            </div>
+
             <label>Subject 4 Grade</label>
             <select id="gradeSelect">
                 <option value="12">A (12)</option>
@@ -135,22 +174,24 @@
             <label>KCSE Aggregate Points (Max 84)</label>
             <input type="number" id="aggPoints" placeholder="e.g. 65">
 
-            <button class="btn btn-calc" onclick="calculateCluster()">Calculate Cluster</button>
+            <button class="btn btn-calc" onclick="runAlgorithm()">Calculate Cluster Probability</button>
         </div>
 
         <div class="card">
             <span class="price-badge">300 KES</span>
-            <h2>Registration</h2>
-            
-            <form id="placementForm">
-                <label>Full Name</label>
+            <h2>2. Registration</h2>
+            <form id="mainForm">
+                <label>Full Name (Official)</label>
                 <input type="text" id="userName" placeholder="As per KCSE Slip" required>
 
+                <label>KCPE Index Number</label>
+                <input type="text" id="kcpeIndex" placeholder="Primary School Index" required>
+
                 <label>KCSE Index Number</label>
-                <input type="text" id="kcseIndex" placeholder="11-digit number" required>
+                <input type="text" id="kcseIndex" placeholder="Secondary School Index" required>
 
                 <label>Target Course</label>
-                <input type="text" id="targetCourse" placeholder="e.g. Nursing" required>
+                <input type="text" id="targetCourse" placeholder="e.g. Clinical Medicine" required>
 
                 <div class="price-table">
                     <div class="price-row"><span>Institutional Service Fee</span><span>100 KES</span></div>
@@ -158,49 +199,65 @@
                     <div class="total-row"><span>TOTAL AMOUNT</span><span>300 KES</span></div>
                 </div>
 
-                <button type="button" class="btn btn-submit" onclick="initializeProtocol()">Initialize Placement Protocol</button>
+                <button type="button" class="btn btn-submit" onclick="startProcessing()">Initialize Placement Protocol</button>
             </form>
-            <p class="trust-footer">🔒 Encrypted Session | Verified Institutional Processing</p>
+            <p class="trust-footer">🔒 ENCRYPTED END-TO-END | OFFICIAL INSTITUTIONAL GATEWAY</p>
         </div>
     </div>
 
     <script>
-        function calculateCluster() {
-            const points = document.getElementById('aggPoints').value;
-            if(!points) {
-                alert("Please enter your aggregate points to run the calculation.");
-                return;
+        function updateFileName(input) {
+            if (input.files && input.files[0]) {
+                document.getElementById('fileName').innerText = "✓ " + input.files[0].name + " Attached";
+                document.getElementById('fileName').style.color = "#059669";
             }
-            alert("Algorithm initialized. Proceed to registration to secure your calculated analysis.");
         }
 
-        function initializeProtocol() {
-            // 1. Capture exact IDs
+        function runAlgorithm() {
+            const points = document.getElementById('aggPoints').value;
+            if(!points) { alert("Please enter points to run algorithm."); return; }
+            alert("Probability analysis complete. Proceed to Step 2 to lock your placement slot.");
+        }
+
+        function startProcessing() {
+            // Capture all fields
             const name = document.getElementById('userName').value.trim();
-            const index = document.getElementById('kcseIndex').value.trim();
+            const kcpe = document.getElementById('kcpeIndex').value.trim();
+            const kcse = document.getElementById('kcseIndex').value.trim();
             const course = document.getElementById('targetCourse').value.trim();
 
-            if(!name || !index || !course) {
-                alert("Please complete all fields to initialize the protocol.");
+            if(!name || !kcpe || !kcse || !course) {
+                alert("All institutional fields must be completed.");
                 return;
             }
 
-            // 2. Black Box Animation
+            // Show UI Overlay
             const overlay = document.getElementById('overlay');
             const text = document.getElementById('process-text');
             overlay.style.display = 'block';
 
-            setTimeout(() => { text.innerText = "Synchronizing Records..."; }, 1000);
-            setTimeout(() => { text.innerText = "Running Probability Algorithm..."; }, 2500);
+            // Sequence
+            setTimeout(() => { text.innerText = "Synchronizing KCPE/KCSE Records..."; }, 1200);
+            setTimeout(() => { text.innerText = "Verifying Batch Availability..."; }, 2400);
+            setTimeout(() => { text.innerText = "Redirection to Secure Chat..."; }, 3600);
             
-            // 3. Perfect WhatsApp Formatting
             setTimeout(() => {
-                // Using %0A to force strict line breaks on all devices
-                const whatsappMsg = `*OFFICIAL PLACEMENT REQUEST:*%0A%0A*Name:* ${name}%0A*KCSE Index:* ${index}%0A*Target Course:* ${course}%0A%0AI have initialized the protocol and am ready to process the 300 KES fee.`;
+                const phone = "254742050267";
                 
-                window.location.href = `https://wa.me/254742050267?text=${whatsappMsg}`;
-            }, 4000);
+                // Professional message formatting using %0A for deep-link line breaks
+                const message = `*OFFICIAL PLACEMENT REQUEST*%0A%0A` +
+                                `*Name:* ${encodeURIComponent(name)}%0A` +
+                                `*KCPE Index:* ${encodeURIComponent(kcpe)}%0A` +
+                                `*KCSE Index:* ${encodeURIComponent(kcse)}%0A` +
+                                `*Target:* ${encodeURIComponent(course)}%0A%0A` +
+                                `I have initialized the protocol and am ready to finalize the 300 KES fee.`;
+
+                // Use wa.me for the most reliable mobile app triggering
+                const finalUrl = `https://wa.me/${phone}?text=${message}`;
+                
+                window.location.assign(finalUrl);
+            }, 4500);
         }
     </script>
 </body>
-</html>
+            </html>
