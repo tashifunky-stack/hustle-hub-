@@ -3,166 +3,145 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>KUCCPS Premium Assistant | Official 2026 Portal</title>
+    <title>Placement Portal 2026</title>
     <style>
-        :root { --primary: #003366; --secondary: #2c3e50; --accent: #f1c40f; --success: #27ae60; --light: #ecf0f1; }
-        body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; background-color: #f4f7f6; color: #333; line-height: 1.6; scroll-behavior: smooth; }
+        :root { --bg: #f8fafc; --card: #ffffff; --primary: #1e293b; --accent: #3b82f6; --text: #334155; --success: #22c55e; }
+        body { font-family: 'Inter', sans-serif; margin: 0; background-color: var(--bg); color: var(--text); }
+
+        /* Modern Navigation */
+        nav { padding: 20px 5%; display: flex; justify-content: space-between; align-items: center; background: transparent; }
+        .menu-toggle { cursor: pointer; font-size: 24px; padding: 10px; border-radius: 8px; background: white; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        .brand-name { font-weight: 800; font-size: 1.2rem; letter-spacing: -1px; color: var(--primary); }
+
+        /* Clean Pop-out Menu */
+        .sidebar { position: fixed; left: -300px; top: 0; height: 100vh; width: 300px; background: white; z-index: 2000; transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1); padding: 40px 20px; box-shadow: 10px 0 30px rgba(0,0,0,0.05); }
+        .sidebar.open { left: 0; }
+        .sidebar-item { padding: 15px; margin-bottom: 10px; border-radius: 10px; text-decoration: none; color: var(--text); display: block; font-weight: 500; transition: 0.2s; }
+        .sidebar-item:hover { background: #f1f5f9; color: var(--accent); }
+        .overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.2); backdrop-filter: blur(4px); display: none; z-index: 1500; }
+        .overlay.show { display: block; }
+
+        /* Dashboard Sheet */
+        .sheet { max-width: 650px; margin: 0 auto; padding: 20px; }
+        .card { background: var(--card); border-radius: 20px; padding: 35px; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.04); margin-bottom: 25px; border: 1px solid #f1f5f9; }
         
-        nav { background: white; padding: 10px 5%; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000; }
-        nav .brand { font-size: 20px; font-weight: bold; color: var(--primary); }
-        nav .nav-links a { margin-left: 20px; text-decoration: none; color: var(--secondary); font-size: 14px; font-weight: 500; }
-
-        .layout { display: flex; max-width: 1200px; margin: 20px auto; min-height: 80vh; gap: 20px; padding: 0 15px; }
-
-        .sidebar { width: 280px; background: var(--secondary); color: white; padding: 25px; border-radius: 8px; display: flex; flex-direction: column; gap: 15px; }
-        .sidebar h3 { font-size: 16px; color: var(--accent); text-transform: uppercase; border-bottom: 1px solid #455a64; padding-bottom: 10px; margin-top: 0; }
-        .sidebar a { color: #bdc3c7; text-decoration: none; padding: 12px; border-radius: 4px; font-size: 14px; background: rgba(255,255,255,0.05); transition: 0.3s; }
-        .sidebar a:hover { background: var(--primary); color: white; transform: translateX(5px); }
+        h2 { font-size: 1.5rem; margin-top: 0; color: var(--primary); }
+        .input-group { margin-bottom: 20px; }
+        label { font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; color: #94a3b8; display: block; margin-bottom: 8px; }
         
-        .fee-info { background: #1a252f; padding: 15px; border-radius: 5px; font-size: 13px; border-left: 4px solid var(--accent); }
+        select, input { width: 100%; padding: 14px; border-radius: 12px; border: 1px solid #e2e8f0; font-size: 1rem; color: var(--primary); transition: 0.2s; }
+        select:focus, input:focus { outline: none; border-color: var(--accent); ring: 2px rgba(59, 130, 246, 0.1); }
 
-        .main { flex: 1; }
-        .card { background: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); margin-bottom: 30px; }
-        .price-tag { background: var(--primary); color: white; padding: 10px 20px; border-radius: 8px; font-size: 16px; font-weight: bold; display: inline-block; margin-bottom: 20px; border: 2px solid var(--accent); }
-        
-        .form-group { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-        input, select { width: 100%; padding: 12px; margin: 8px 0 15px 0; border: 1px solid #ddd; border-radius: 6px; box-sizing: border-box; background: #fafafa; }
-        label { font-weight: 600; font-size: 13px; color: var(--secondary); }
-        
-        .btn-main { background: var(--success); color: white; border: none; padding: 16px; width: 100%; border-radius: 6px; font-size: 18px; font-weight: bold; cursor: pointer; transition: 0.3s; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
-        .btn-main:hover { background: #219150; transform: translateY(-2px); }
+        .btn { width: 100%; padding: 16px; border-radius: 12px; border: none; font-weight: 700; font-size: 1rem; cursor: pointer; transition: 0.2s; }
+        .btn-primary { background: var(--primary); color: white; margin-top: 10px; }
+        .btn-whatsapp { background: var(--success); color: white; margin-top: 25px; box-shadow: 0 10px 15px -3px rgba(34, 197, 94, 0.2); }
+        .btn:hover { opacity: 0.9; transform: translateY(-1px); }
 
-        .result-box { background: #f1f9f5; border: 1px dashed var(--success); padding: 15px; border-radius: 6px; margin-top: 10px; display: none; }
-
-        footer { background: white; border-top: 1px solid #ddd; padding: 40px 5%; margin-top: 50px; text-align: center; }
-
-        @media (max-width: 768px) {
-            .layout { flex-direction: column; }
-            .sidebar { width: 100%; }
-            .form-group { grid-template-columns: 1fr; }
-        }
+        .result-sheet { background: #f8fafc; border-radius: 15px; padding: 20px; text-align: center; display: none; margin-top: 20px; border: 1px dashed #cbd5e1; }
+        .points-text { font-size: 2.5rem; font-weight: 800; color: var(--accent); display: block; }
     </style>
 </head>
 <body>
 
 <nav>
-    <div class="brand">KUCCPS ASSISTANT</div>
-    <div class="nav-links">
-        <a href="#calc">Calculator</a>
-        <a href="#apply">Apply Now</a>
-        <a href="https://students.kuccps.net/" target="_blank">Official Portal</a>
-    </div>
-</nav>
+    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+    <div class="brand-name">PORTAL•2026</div>
+    <div style="width:40px;"></div> </nav>
 
-<div class="layout">
-    <div class="sidebar">
-        <h3>Portal Tools</h3>
-        <a href="#calc">🧮 Cluster Calculator</a>
-        <a href="#apply">📝 Application Form</a>
-        <a href="#courses">🎓 Available Courses</a>
-        <a href="https://wa.me/254742050267">📞 Direct Support</a>
-        
-        <div class="fee-info">
-            <strong style="color: var(--accent);">FULL SERVICE FEE:</strong><br>
-            • Govt Fee: 1,500/-<br>
-            • Service Fee: 350/-<br><hr>
-            <strong>TOTAL: 1,850/-</strong>
-        </div>
-    </div>
+<div class="overlay" id="overlay" onclick="toggleMenu()"></div>
 
-    <div class="main">
-        <div class="card" id="calc">
-            <h2 style="margin-top:0;">🧮 Weighted Cluster Calculator</h2>
-            <p style="font-size: 14px; color: #666;">Enter your points for the 4 required cluster subjects and your total aggregate.</p>
-            
-            <div class="form-group">
-                <div>
-                    <label>Cluster Subject 1 (Points)</label>
-                    <input type="number" id="c1" placeholder="e.g. 12" max="12">
-                </div>
-                <div>
-                    <label>Cluster Subject 2 (Points)</label>
-                    <input type="number" id="c2" placeholder="e.g. 11" max="12">
-                </div>
-                <div>
-                    <label>Cluster Subject 3 (Points)</label>
-                    <input type="number" id="c3" placeholder="e.g. 10" max="12">
-                </div>
-                <div>
-                    <label>Cluster Subject 4 (Points)</label>
-                    <input type="number" id="c4" placeholder="e.g. 9" max="12">
-                </div>
-            </div>
-            <label>Total Aggregate Points (Out of 84)</label>
-            <input type="number" id="agg" placeholder="e.g. 65" max="84">
-
-            <button class="btn-main" style="background: var(--primary);" onclick="calculateWeightedCluster()">Calculate Cluster Points</button>
-            
-            <div id="res" class="result-box">
-                <strong>Estimated Cluster: </strong> <span id="val" style="color:var(--success); font-size:20px;">0.000</span>
-            </div>
-        </div>
-
-        <div class="card" id="apply">
-            <div class="price-tag">Total Full Service: Ksh 1,850</div>
-            <h2>Placement Assistant Form</h2>
-            <label>Full Name</label>
-            <input type="text" id="name" placeholder="John Kamau">
-
-            <div class="form-group">
-                <div>
-                    <label>KCSE Index</label>
-                    <input type="text" id="kcse" placeholder="11-digit Index">
-                </div>
-                <div>
-                    <label>KCPE Index</label>
-                    <input type="text" id="kcpe" placeholder="Index Number">
-                </div>
-            </div>
-
-            <label>Preferred Course</label>
-            <input type="text" id="choice" placeholder="e.g. Clinical Medicine">
-
-            <button class="btn-main" onclick="sendData()">SUBMIT & PAY 1,850/- VIA WHATSAPP</button>
-        </div>
+<div class="sidebar" id="sidebar">
+    <div style="font-size:1.5rem; font-weight:800; margin-bottom:30px;">Menu</div>
+    <a href="#calc" class="sidebar-item" onclick="toggleMenu()">Calculator</a>
+    <a href="#apply" class="sidebar-item" onclick="toggleMenu()">Registration</a>
+    <a href="https://wa.me/254742050267" class="sidebar-item">Live Support</a>
+    <div style="margin-top:auto; padding:20px; background:#f8fafc; border-radius:15px; font-size:0.8rem;">
+        <strong>Total Package: 1,850/-</strong><br>
+        Includes 1,500 government fee.
     </div>
 </div>
 
-<footer>
-    <p>&copy; 2026 Student Placement Helper. Support: 0742050267</p>
-</footer>
+<div class="sheet">
+    
+    <div class="card" id="calc">
+        <h2>Cluster Sheet</h2>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+            <div class="input-group">
+                <label>Subject 1</label>
+                <select id="s1"><option value="12">A</option><option value="11">A-</option><option value="10">B+</option><option value="9">B</option><option value="8">B-</option><option value="7">C+</option><option value="6">C</option></select>
+            </div>
+            <div class="input-group">
+                <label>Subject 2</label>
+                <select id="s2"><option value="12">A</option><option value="11">A-</option><option value="10">B+</option><option value="9">B</option><option value="8">B-</option><option value="7">C+</option><option value="6">C</option></select>
+            </div>
+            <div class="input-group">
+                <label>Subject 3</label>
+                <select id="s3"><option value="12">A</option><option value="11">A-</option><option value="10">B+</option><option value="9">B</option><option value="8">B-</option><option value="7">C+</option><option value="6">C</option></select>
+            </div>
+            <div class="input-group">
+                <label>Subject 4</label>
+                <select id="s4"><option value="12">A</option><option value="11">A-</option><option value="10">B+</option><option value="9">B</option><option value="8">B-</option><option value="7">C+</option><option value="6">C</option></select>
+            </div>
+        </div>
+        <div class="input-group">
+            <label>Total KCSE Aggregate</label>
+            <input type="number" id="agg" placeholder="Total Points (Max 84)">
+        </div>
+        <button class="btn btn-primary" onclick="runCalc()">Update Calculations</button>
+
+        <div class="result-sheet" id="res">
+            <span style="font-weight:600; font-size:0.9rem;">Weighted Cluster</span>
+            <span class="points-text" id="val">0.000</span>
+        </div>
+    </div>
+
+    <div class="card" id="apply">
+        <h2>Registration</h2>
+        <div class="input-group">
+            <label>Full Name</label>
+            <input type="text" id="name" placeholder="Official Name">
+        </div>
+        <div class="input-group">
+            <label>Index Number</label>
+            <input type="text" id="idx" placeholder="11-digit index">
+        </div>
+        <div class="input-group">
+            <label>Course Interest</label>
+            <input type="text" id="course" placeholder="e.g. Clinical Medicine">
+        </div>
+        <button class="btn btn-whatsapp" onclick="send()">Complete Application (1,850/-)</button>
+    </div>
+</div>
 
 <script>
-    function calculateWeightedCluster() {
-        const c1 = parseFloat(document.getElementById('c1').value) || 0;
-        const c2 = parseFloat(document.getElementById('c2').value) || 0;
-        const c3 = parseFloat(document.getElementById('c3').value) || 0;
-        const c4 = parseFloat(document.getElementById('c4').value) || 0;
-        const agg = parseFloat(document.getElementById('agg').value) || 0;
-
-        if(!agg) { alert("Please enter your total aggregate points."); return; }
-
-        // The Official Formula: sqrt((Sum of 4 Subjects / 48) * (Aggregate / 84)) * 48
-        const s = (c1 + c2 + c3 + c4);
-        const a = agg;
-        
-        const weighted = Math.sqrt((s / 48) * (a / 84)) * 48;
-        
-        document.getElementById('res').style.display = "block";
-        document.getElementById('val').innerText = weighted.toFixed(3);
+    function toggleMenu() {
+        document.getElementById('sidebar').classList.toggle('open');
+        document.getElementById('overlay').classList.toggle('show');
     }
 
-    function sendData() {
-        const name = document.getElementById('name').value;
-        const kcse = document.getElementById('kcse').value;
-        const choice = document.getElementById('choice').value;
-        if(!name || !kcse) { alert("Please enter Name and KCSE Index"); return; }
+    function runCalc() {
+        const sum = parseFloat(document.getElementById('s1').value) + 
+                    parseFloat(document.getElementById('s2').value) + 
+                    parseFloat(document.getElementById('s3').value) + 
+                    parseFloat(document.getElementById('s4').value);
+        const agg = parseFloat(document.getElementById('agg').value) || 0;
+        
+        if(agg > 84 || agg < 1) { alert("Please enter valid aggregate points"); return; }
+        
+        const cluster = Math.sqrt((sum/48) * (agg/84)) * 48;
+        document.getElementById('res').style.display = "block";
+        document.getElementById('val').innerText = cluster.toFixed(3);
+    }
 
-        const phone = "254742050267"; 
-        const msg = `*NEW APPLICATION REQUEST*\nName: ${name}\nKCSE: ${kcse}\nChoice: ${choice}\n\nI am ready to pay 1,850/- for the full service.`;
-        window.open(`https://wa.me/${phone}?text=${encodeURIComponent(msg)}`, '_blank');
+    function send() {
+        const name = document.getElementById('name').value;
+        const pts = document.getElementById('val').innerText;
+        if(!name) { alert("Please enter your name"); return; }
+        
+        const msg = `*KUCCPS 2026 REGISTRATION*\nName: ${name}\nCluster: ${pts}\n\nReady for full placement (1,850 KES).`;
+        window.open(`https://wa.me/254742050267?text=${encodeURIComponent(msg)}`);
     }
 </script>
 
 </body>
-    </html>
+            </html>
