@@ -6,52 +6,40 @@
     <title>KUCCPS Premium Assistant | Official 2026 Portal</title>
     <style>
         :root { --primary: #003366; --secondary: #2c3e50; --accent: #f1c40f; --success: #27ae60; --light: #ecf0f1; }
-        body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; background-color: #f4f7f6; color: #333; line-height: 1.6; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; margin: 0; background-color: #f4f7f6; color: #333; line-height: 1.6; scroll-behavior: smooth; }
         
-        /* Navigation Bar */
         nav { background: white; padding: 10px 5%; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 1000; }
         nav .brand { font-size: 20px; font-weight: bold; color: var(--primary); }
         nav .nav-links a { margin-left: 20px; text-decoration: none; color: var(--secondary); font-size: 14px; font-weight: 500; }
-        nav .nav-links a:hover { color: var(--primary); }
 
         .layout { display: flex; max-width: 1200px; margin: 20px auto; min-height: 80vh; gap: 20px; padding: 0 15px; }
 
-        /* Sidebar Styling */
         .sidebar { width: 280px; background: var(--secondary); color: white; padding: 25px; border-radius: 8px; display: flex; flex-direction: column; gap: 15px; }
-        .sidebar h3 { font-size: 16px; color: var(--accent); text-transform: uppercase; letter-spacing: 1px; border-bottom: 1px solid #455a64; padding-bottom: 10px; margin-top: 0; }
+        .sidebar h3 { font-size: 16px; color: var(--accent); text-transform: uppercase; border-bottom: 1px solid #455a64; padding-bottom: 10px; margin-top: 0; }
         .sidebar a { color: #bdc3c7; text-decoration: none; padding: 12px; border-radius: 4px; font-size: 14px; background: rgba(255,255,255,0.05); transition: 0.3s; }
         .sidebar a:hover { background: var(--primary); color: white; transform: translateX(5px); }
         
         .fee-info { background: #1a252f; padding: 15px; border-radius: 5px; font-size: 13px; border-left: 4px solid var(--accent); }
 
-        /* Main Content */
         .main { flex: 1; }
         .card { background: white; padding: 30px; border-radius: 8px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); margin-bottom: 30px; }
-        .price-tag { background: var(--success); color: white; padding: 6px 15px; border-radius: 20px; font-size: 14px; font-weight: bold; display: inline-block; margin-bottom: 15px; }
+        .price-tag { background: var(--primary); color: white; padding: 10px 20px; border-radius: 8px; font-size: 16px; font-weight: bold; display: inline-block; margin-bottom: 20px; border: 2px solid var(--accent); }
         
         .form-group { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-        input, select { width: 100%; padding: 12px; margin: 8px 0 20px 0; border: 1px solid #ddd; border-radius: 6px; box-sizing: border-box; background: #fafafa; }
-        input:focus { border-color: var(--primary); outline: none; background: white; }
-        label { font-weight: 600; font-size: 14px; color: var(--secondary); }
+        input, select { width: 100%; padding: 12px; margin: 8px 0 15px 0; border: 1px solid #ddd; border-radius: 6px; box-sizing: border-box; background: #fafafa; }
+        label { font-weight: 600; font-size: 13px; color: var(--secondary); }
         
-        .btn-main { background: var(--primary); color: white; border: none; padding: 16px; width: 100%; border-radius: 6px; font-size: 16px; font-weight: bold; cursor: pointer; transition: 0.3s; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
-        .btn-main:hover { background: #002244; transform: translateY(-2px); }
+        .btn-main { background: var(--success); color: white; border: none; padding: 16px; width: 100%; border-radius: 6px; font-size: 18px; font-weight: bold; cursor: pointer; transition: 0.3s; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .btn-main:hover { background: #219150; transform: translateY(-2px); }
 
-        /* Course List */
-        .course-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 15px; }
-        .course-card { background: white; padding: 18px; border-radius: 8px; border: 1px solid #eee; transition: 0.3s; }
-        .course-card:hover { border-color: var(--primary); box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
-        .course-card h4 { margin: 0 0 8px 0; color: var(--primary); font-size: 16px; }
-        .apply-small { background: #f8f9fa; border: 1px solid #ddd; padding: 10px; width: 100%; border-radius: 4px; cursor: pointer; font-weight: bold; color: var(--primary); font-size: 13px; }
+        .result-box { background: #f1f9f5; border: 1px dashed var(--success); padding: 15px; border-radius: 6px; margin-top: 10px; display: none; }
 
         footer { background: white; border-top: 1px solid #ddd; padding: 40px 5%; margin-top: 50px; text-align: center; }
-        .social-links a { margin: 0 15px; text-decoration: none; font-weight: bold; color: var(--primary); }
 
         @media (max-width: 768px) {
             .layout { flex-direction: column; }
-            .sidebar { width: 100%; box-sizing: border-box; }
+            .sidebar { width: 100%; }
             .form-group { grid-template-columns: 1fr; }
-            nav .nav-links { display: none; } /* Hide extra links on tiny screens */
         }
     </style>
 </head>
@@ -60,122 +48,121 @@
 <nav>
     <div class="brand">KUCCPS ASSISTANT</div>
     <div class="nav-links">
-        <a href="#">Home</a>
+        <a href="#calc">Calculator</a>
         <a href="#apply">Apply Now</a>
-        <a href="#courses">Courses</a>
-        <a href="https://students.kuccps.net/" target="_blank" style="color: #e74c3c;">Official Login</a>
+        <a href="https://students.kuccps.net/" target="_blank">Official Portal</a>
     </div>
 </nav>
 
 <div class="layout">
     <div class="sidebar">
         <h3>Portal Tools</h3>
-        <a href="#" onclick="alert('System Updating...')">📈 2026 Cut-off Points (PDF)</a>
-        <a href="#" onclick="alert('Calculator loading...')">🧮 Cluster Calculator</a>
-        <a href="#" onclick="alert('Fetching listings...')">🏫 Available Universities</a>
-        <a href="#" onclick="alert('Fetching listings...')">🏭 Available TVET Colleges</a>
-        <a href="#" onclick="alert('Opening FAQ...')">❓ Frequently Asked Questions</a>
+        <a href="#calc">🧮 Cluster Calculator</a>
+        <a href="#apply">📝 Application Form</a>
+        <a href="#courses">🎓 Available Courses</a>
+        <a href="https://wa.me/254742050267">📞 Direct Support</a>
         
         <div class="fee-info">
-            <strong style="color: var(--accent);">PAYMENT GUIDE:</strong><br>
-            1. Submit form below.<br>
-            2. Our agent will call you.<br>
-            3. Pay <strong>Ksh 350</strong> service fee.<br>
-            4. Receive your placement receipt.
+            <strong style="color: var(--accent);">FULL SERVICE FEE:</strong><br>
+            • Govt Fee: 1,500/-<br>
+            • Service Fee: 350/-<br><hr>
+            <strong>TOTAL: 1,850/-</strong>
         </div>
     </div>
 
-    <div class="main" id="apply">
-        <div class="card">
-            <div class="price-tag">Consultation Fee: Ksh 350</div>
-            <h2 style="margin-top: 0;">Application Assistant Form</h2>
-            <p style="font-size: 14px; color: #7f8c8d;">Secure your future today. Fill in the details accurately for professional placement.</p>
+    <div class="main">
+        <div class="card" id="calc">
+            <h2 style="margin-top:0;">🧮 Weighted Cluster Calculator</h2>
+            <p style="font-size: 14px; color: #666;">Enter your points for the 4 required cluster subjects and your total aggregate.</p>
             
-            <label>Student Full Name</label>
-            <input type="text" id="name" placeholder="John Kamau Onyango">
+            <div class="form-group">
+                <div>
+                    <label>Cluster Subject 1 (Points)</label>
+                    <input type="number" id="c1" placeholder="e.g. 12" max="12">
+                </div>
+                <div>
+                    <label>Cluster Subject 2 (Points)</label>
+                    <input type="number" id="c2" placeholder="e.g. 11" max="12">
+                </div>
+                <div>
+                    <label>Cluster Subject 3 (Points)</label>
+                    <input type="number" id="c3" placeholder="e.g. 10" max="12">
+                </div>
+                <div>
+                    <label>Cluster Subject 4 (Points)</label>
+                    <input type="number" id="c4" placeholder="e.g. 9" max="12">
+                </div>
+            </div>
+            <label>Total Aggregate Points (Out of 84)</label>
+            <input type="number" id="agg" placeholder="e.g. 65" max="84">
+
+            <button class="btn-main" style="background: var(--primary);" onclick="calculateWeightedCluster()">Calculate Cluster Points</button>
+            
+            <div id="res" class="result-box">
+                <strong>Estimated Cluster: </strong> <span id="val" style="color:var(--success); font-size:20px;">0.000</span>
+            </div>
+        </div>
+
+        <div class="card" id="apply">
+            <div class="price-tag">Total Full Service: Ksh 1,850</div>
+            <h2>Placement Assistant Form</h2>
+            <label>Full Name</label>
+            <input type="text" id="name" placeholder="John Kamau">
 
             <div class="form-group">
                 <div>
-                    <label>KCSE Index Number</label>
+                    <label>KCSE Index</label>
                     <input type="text" id="kcse" placeholder="11-digit Index">
                 </div>
                 <div>
-                    <label>KCPE Index Number</label>
+                    <label>KCPE Index</label>
                     <input type="text" id="kcpe" placeholder="Index Number">
                 </div>
             </div>
 
-            <label>Institution/Course Choice</label>
-            <input type="text" id="choice" placeholder="e.g. Clinical Medicine - KMTC">
+            <label>Preferred Course</label>
+            <input type="text" id="choice" placeholder="e.g. Clinical Medicine">
 
-            <button class="btn-main" onclick="sendData('Full Application Request')">SUBMIT & REQUEST ASSISTANCE</button>
-        </div>
-
-        <h3 id="courses">Recommended 2026 Placements</h3>
-        <div class="course-grid">
-            <div class="course-card">
-                <h4>Radiology & Imaging</h4>
-                <p style="font-size:12px; color:#95a5a6;">Diploma • 3 Years</p>
-                <button class="apply-small" onclick="quickApply('Radiology')">Apply for Me</button>
-            </div>
-            <div class="course-card">
-                <h4>Clinical Medicine</h4>
-                <p style="font-size:12px; color:#95a5a6;">Diploma • 3.5 Years</p>
-                <button class="apply-small" onclick="quickApply('Clinical Medicine')">Apply for Me</button>
-            </div>
-            <div class="course-card">
-                <h4>Software Engineering</h4>
-                <p style="font-size:12px; color:#95a5a6;">Degree/Diploma</p>
-                <button class="apply-small" onclick="quickApply('Software Engineering')">Apply for Me</button>
-            </div>
-            <div class="course-card">
-                <h4>Nursing Science</h4>
-                <p style="font-size:12px; color:#95a5a6;">Diploma • 3 Years</p>
-                <button class="apply-small" onclick="quickApply('Nursing')">Apply for Me</button>
-            </div>
+            <button class="btn-main" onclick="sendData()">SUBMIT & PAY 1,850/- VIA WHATSAPP</button>
         </div>
     </div>
 </div>
 
 <footer>
-    <div class="social-links">
-        <a href="https://wa.me/254742050267">WhatsApp Support</a>
-        <a href="#">TikTok Tips</a>
-        <a href="#">Facebook Group</a>
-    </div>
-    <p style="font-size: 12px; color: #7f8c8d; margin-top: 20px;">
-        &copy; 2026 Student Placement Helper. Not affiliated with official KUCCPS government body.<br>
-        <strong>Support Line: 0742050267</strong>
-    </p>
+    <p>&copy; 2026 Student Placement Helper. Support: 0742050267</p>
 </footer>
 
 <script>
-    function sendData(type) {
-        const name = document.getElementById('name').value;
-        const kcse = document.getElementById('kcse').value;
-        const kcpe = document.getElementById('kcpe').value;
-        const choice = document.getElementById('choice').value;
-        
-        if(!name || !kcse) { alert("Please enter your Full Name and KCSE Index Number."); return; }
+    function calculateWeightedCluster() {
+        const c1 = parseFloat(document.getElementById('c1').value) || 0;
+        const c2 = parseFloat(document.getElementById('c2').value) || 0;
+        const c3 = parseFloat(document.getElementById('c3').value) || 0;
+        const c4 = parseFloat(document.getElementById('c4').value) || 0;
+        const agg = parseFloat(document.getElementById('agg').value) || 0;
 
-        const phone = "254742050267"; 
-        const msg = `*NEW KUCCPS APPLICATION REQUEST*\n` +
-                    `--------------------------------\n` +
-                    `*Student Name:* ${name}\n` +
-                    `*KCSE Index:* ${kcse}\n` +
-                    `*KCPE Index:* ${kcpe}\n` +
-                    `*Course Choice:* ${choice}\n\n` +
-                    `I am ready to pay the *Ksh 350* service fee. Please contact me for the next steps.`;
+        if(!agg) { alert("Please enter your total aggregate points."); return; }
+
+        // The Official Formula: sqrt((Sum of 4 Subjects / 48) * (Aggregate / 84)) * 48
+        const s = (c1 + c2 + c3 + c4);
+        const a = agg;
         
-        window.open(`https://wa.me/${phone}?text=${encodeURIComponent(msg)}`, '_blank');
+        const weighted = Math.sqrt((s / 48) * (a / 84)) * 48;
+        
+        document.getElementById('res').style.display = "block";
+        document.getElementById('val').innerText = weighted.toFixed(3);
     }
 
-    function quickApply(courseName) {
-        document.getElementById('choice').value = courseName;
-        document.getElementById('name').focus();
-        alert("Quick-select: " + courseName + ". Please complete your details in the form above.");
+    function sendData() {
+        const name = document.getElementById('name').value;
+        const kcse = document.getElementById('kcse').value;
+        const choice = document.getElementById('choice').value;
+        if(!name || !kcse) { alert("Please enter Name and KCSE Index"); return; }
+
+        const phone = "254742050267"; 
+        const msg = `*NEW APPLICATION REQUEST*\nName: ${name}\nKCSE: ${kcse}\nChoice: ${choice}\n\nI am ready to pay 1,850/- for the full service.`;
+        window.open(`https://wa.me/${phone}?text=${encodeURIComponent(msg)}`, '_blank');
     }
 </script>
 
 </body>
-</html>
+    </html>
